@@ -51,3 +51,105 @@ the password doesn’t match:
 14|    print( "Access granted, welcome { }".format(user[ "name" ]) )
 16| user = { "name" : "Jess", "password" : "ilywpf" }
 18| restrictedFunc(user)
+==============================**************************=======================================
+
+
+
+
+#+++++++++++++Creating a DataFrame+++++++++++++
+# importing the pandas library
+import pandas as pd # industry standard name of pd when importing
+# using the from_dict method to convert a dictionary into a Pandas 
+import random
+random.seed(3) # generate same random numbers every time, number used doesn't matter
+names = [ "Jess", "Jordan", "Sandy", "Ted", "Barney", "Tyler", "Rebecca" ]
+ages = [ random.randint(18, 35) for x in range( len(names) )]
+people = { "names" : names, "ages" : ages }
+df = pd.DataFrame.from_dict(people)
+print(df)
+
+==========================*********************************=======================================
+Built-in Methods
+These are methods that are frequently used to make your life easier when using Pandas. 
+It is possible to spend a whole week simply exploring the built-in functions supported by 
+DataFrames in Pandas. However, we will simply highlight a few that will be useful, to give 
+you an idea of what’s possible out of the box with Pandas.
+Chapter 10 Introduction to Data Analysis
+269
+head( )
+When you work with large sets of data, you’ll often want to view a couple records to get 
+an idea of what you’re looking at. To see the top records in the DataFrame, along with the 
+column names, you use the head() method:
+# accessing the top 5 records using .head( )
+df.head(5)
+Go ahead and run the cell. This will output the top five records. The argument 
+passed into the method is arbitrary and will show as many records as you want from 
+the top.
+tail( )
+To view a given number of records from the bottom, you would use the tail() method:
+# accessing the bottom 3 records using .tail( )
+df.tail(3)
+Go ahead and run the cell. This will output the bottom three records for us to view.
+keys( )
+Sometimes you’ll need the column names. Whether you’re making a modular script or 
+analyzing the data you’re working with, using the keys( ) method will help:
+# accessing the column headers (keys) using the .keys( ) method
+headers = df.keys( )
+print(headers)
+Go ahead and run the cell. This will output a list of the header names in our 
+DataFrame.
+
+
+.shape
+The shape of a DataFrame describes the number of records by the number of columns. 
+It’s always important to check the shape to ensure you’re working with the proper 
+amount of data:
+# checking the shape, which is the number of records and columns
+print( df.shape )
+Go ahead and run the cell. We’ll get a (7, 2) tuple returned, representing records and 
+columns.
+describe( )
+The describe method will give you a base analysis for all numerical data. You’ll be able 
+to view min, max, 25%, 50%, mean, etc., on all columns just by calling this method on the 
+DataFrame. This information is helpful to start your analysis but generally won’t answer 
+those questions you’re looking for. Instead, we can use this method as a guideline of 
+where to start:
+# checking the general statistics of the DataFrame using .describe( ), 
+only works on numerical columns
+df.describe( )
+Go ahead and run the cell. Remember that it’ll only give back information on 
+numerical column types, which is why we only see an output for the ages column.
+sort_values( )
+When you need to sort a DataFrame based on column information, you use this method. 
+You can pass in one or multiple columns to be sorted by. When passing multiple, you must 
+pass them in as a list of column names, in which the first name will take precedence:
+# sort based on a given column, but keep the DataFrame in tact using 
+sort_values( )
+df = df.sort_values("ages")
+df.head(5)
+
+
+Go ahead and run the cell. In this cell, we’ve re-declared the value of our df variable 
+to our newly sorted DataFrame. This way we can view all the people sorted by age. You 
+may also pass in an argument to sort in descending order.
+
+====================***************************==============================
+
+# importing the pandas library
+import pandas as pd # industry standard name of pd when importing
+# using the from_dict method to convert a dictionary into a Pandas 
+import random
+random.seed(3) # generate same random numbers every time, number used doesn't matter
+names = [ "Jess", "Jordan", "Sandy", "Ted", "Barney", "Tyler", "Rebecca" ]
+ages = [ random.randint(18, 35) for x in range( len(names) )]
+people = { "names" : names, "ages" : ages }
+df = pd.DataFrame.from_dict(people)
+#print(df)
+# generating a new column of fake data for each record in the DataFrame to represent customer tenure
+random.seed(321)
+tenure = [ random.randint(0, 10) for x in range( len(df) )]
+df["tenure"] = tenure # same as adding a new key-value pair in a dictionary
+df.head( )
+print(df)
+
+=========================*************************=============================
