@@ -1,0 +1,53 @@
+Creating and Applying a Decorator
+We’ll need to declare a function that takes in another function as an argument in order 
+to create a decorator. Inside of this decorator, we can then define another function to be 
+returned that will run the function that was passed in as an argument. Let’s see how this 
+is written:
+# creating and applying our own decorator using the @ symbol
+def decorator(func):
+   def wrap( ):
+      print("======")
+      func( )
+      print("======")
+   return wrap
+@decorator
+def printName( ):
+    print("John!")
+printName( )
+================**********=============
+Decorators with Parameters
+Although decorators simply add extra capabilities to functions, they can also have 
+arguments like any other function. Let’s take the following example where we want to 
+run a function x times:
+ 1| # creating a decorator that takes in parameters
+ 3| def run_times(num):
+ 4| def wrap(func):
+ 5| for i in range(num):
+ 6| func( )
+ 7| return wrap
+ 9| @run_times(4)
+10| def sayHello( ):
+11| print("Hello!")
+=================************================
+Restricting Function Access
+You’re probably wondering how decorators can serve a purpose, since the last few cells 
+seem meaningless. For each one of them, we could have simply added those lines within 
+the original function. That was just for syntax understanding though. Decorators are 
+used a lot with frameworks and help to add functionality to many functions that you’ll 
+write within them. One example is being able to restrict access of a page or function 
+based on user login credentials. Let’s create a decorator that will help to restrict access if 
+the password doesn’t match:
+ 1| # real world sim, restricting function access
+ 3| def login_required(func):
+ 4| def wrap(user):
+ 5|        password = input("What is the password?")
+ 6|        if password == user["password"]:
+ 7|             func(user)
+ 8|        else:
+ 9|             print("Access Denied")
+10|    return wrap
+12| @login_required
+13| def restrictedFunc(user):
+14|    print( "Access granted, welcome { }".format(user[ "name" ]) )
+16| user = { "name" : "Jess", "password" : "ilywpf" }
+18| restrictedFunc(user)
