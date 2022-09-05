@@ -1,3 +1,4 @@
+=====================**************==============================
 def fib(n):
     if n <= 1:
         return n
@@ -5,9 +6,6 @@ def fib(n):
         return fib( n-1) + fib(n-2 )
 n=int(input())
 print(fib(n))
-
-
-
 
 =======================*************===========================
 # using memoization with the fibonacci sequence
@@ -23,3 +21,14 @@ def fib(n):
         cache[ n ] = result # save result into dictionary with n as the key
     return result
 print( fib(50) ) # calculates almost instantly
+=======================********************=================================
+# using @lru_cache, Python’s default moization/caching technique
+from functools import lru_cache
+@lru_cache( ) # python’s built-in memoization/caching system
+def fib(n):
+    if n <= 1:
+        return n
+    else:
+        return fib( n -1 ) + fib( n- 2 )
+print(fib(50)) # calculates almost instantly
+==============================*********************==============================
