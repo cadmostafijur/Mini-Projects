@@ -1,3 +1,5 @@
+#it just normal e calculator of my basic add multiply,divide,minus, cse110 
+
 # ask user for calculation to be performed
 operation = input("Would you like to add/subtract/multiply/divide? ").lower( )
 # ask for numbers, alert order matters for subtracting and dividing
